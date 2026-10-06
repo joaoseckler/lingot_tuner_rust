@@ -22,8 +22,10 @@
  * along with lingot_tuner_rust. If not, see <https://www.gnu.org/licenses/>.
  */
 
+pub mod analyzer;
 pub mod audio;
 pub mod config;
+pub mod decimator;
 pub mod defs;
 pub mod fft;
 pub mod filter;
