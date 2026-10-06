@@ -26,8 +26,8 @@
 //! pitch as text. The graphical frontend is the default `lingot-tuner` binary.
 
 use lingot::config::Config;
+use lingot::note::nearest_note;
 use lingot_tuner::core::Core;
-use lingot_tuner::note::nearest_note;
 
 fn main() {
     let config = Config::default();

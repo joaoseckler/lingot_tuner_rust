@@ -24,13 +24,13 @@
 
 //! Needle smoothing, shared by every frontend.
 //!
-//! This lives outside `gui.rs` because the terminal frontend needs exactly the
-//! same motion, and `gui.rs` is compiled out entirely on Android. The filter
-//! design is subtle enough that two copies would drift.
+//! Lives in the `lingot` library (not `lingot-tuner`) so the `lingot-wasm`
+//! crate can reuse it too, alongside the native GUI/TUI/web frontends. The
+//! filter design is subtle enough that separate copies would drift.
 
 use std::time::Instant;
 
-use lingot::filter::Filter;
+use crate::filter::Filter;
 
 /// Within this many cents the note counts as in tune.
 pub const IN_TUNE_CENTS: f64 = 5.0;
@@ -66,7 +66,12 @@ pub struct Needle {
     rest: f64,
     pos: f64,
     accumulator: f64,
-    last_step: Instant,
+    /// `None` until the first [`advance`](Self::advance) call. Lazy so `new`
+    /// never touches the clock — `Instant::now()` panics at runtime on
+    /// `wasm32-unknown-unknown`, which has no clock unless something reads it
+    /// through JS. Callers on that target use [`advance_by`](Self::advance_by)
+    /// exclusively, so this field simply stays `None` for them.
+    last_step: Option<Instant>,
 }
 
 impl Needle {
@@ -76,7 +81,7 @@ impl Needle {
             rest,
             pos: rest,
             accumulator: 0.0,
-            last_step: Instant::now(),
+            last_step: None,
         }
     }
 
@@ -89,8 +94,11 @@ impl Needle {
     /// (no pitch detected). Call once per frame; time elapsed since the last
     /// call drives the fixed-rate stepping.
     pub fn advance(&mut self, target: Option<f64>) {
-        let dt = self.last_step.elapsed().as_secs_f64();
-        self.last_step = Instant::now();
+        let now = Instant::now();
+        let dt = self
+            .last_step
+            .map_or(0.0, |last| (now - last).as_secs_f64());
+        self.last_step = Some(now);
         self.advance_by(target, dt);
     }
 

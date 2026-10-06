@@ -31,8 +31,8 @@ use lingot::config::Config;
 use lingot::scale::Scale;
 
 use crate::core::{Core, TunerResult};
-use crate::gauge::{Needle, IN_TUNE_CENTS};
-use crate::note::nearest_note;
+use lingot::gauge::{Needle, IN_TUNE_CENTS};
+use lingot::note::nearest_note;
 
 /// Half-sweep of the needle, in degrees (matches lingot's `overtureAngle`).
 const OVERTURE_DEG: f32 = 65.0;

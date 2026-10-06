@@ -25,10 +25,11 @@
 //! Application-internal library for the `lingot-tuner` package.
 //!
 //! This is **not** the reusable `lingot` library (Layers 1-3) — it exists only
-//! to share the core loop, needle smoothing and note-mapping helpers between
-//! this package's binaries: `lingot-tuner` (GUI), `lingot-tuner-tui`
-//! (terminal), `lingot-tuner-web` (browser) and `lingot-tuner-cli` (plain
-//! text). It is allowed to contain application-level threading and `egui` code.
+//! to share the core loop between this package's binaries: `lingot-tuner`
+//! (GUI), `lingot-tuner-tui` (terminal), `lingot-tuner-web` (browser) and
+//! `lingot-tuner-cli` (plain text). It is allowed to contain application-level
+//! threading and `egui` code. Needle smoothing and note-mapping live in
+//! `lingot::gauge`/`lingot::note` instead, since `lingot-wasm` needs them too.
 
 /// Advice to print when [`core::Core::start`] fails, or `None` where the
 /// platform offers none.
@@ -55,10 +56,8 @@ pub fn audio_start_hint() -> Option<&'static str> {
 }
 
 pub mod core;
-pub mod gauge;
 #[cfg(all(feature = "gui", not(target_os = "android")))]
 pub mod gui;
-pub mod note;
 #[cfg(feature = "tui")]
 pub mod tui;
 #[cfg(feature = "web")]

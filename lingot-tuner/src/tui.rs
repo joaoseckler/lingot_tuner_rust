@@ -46,8 +46,8 @@ use lingot::config::Config;
 use lingot::scale::Scale;
 
 use crate::core::{Core, TunerResult};
-use crate::gauge::{Needle, IN_TUNE_CENTS};
-use crate::note::nearest_note;
+use lingot::gauge::{Needle, IN_TUNE_CENTS};
+use lingot::note::nearest_note;
 
 /// How often the terminal is redrawn. Well under the needle's fixed 60 Hz
 /// filter step — [`Needle`] accumulates real elapsed time, so a slower redraw

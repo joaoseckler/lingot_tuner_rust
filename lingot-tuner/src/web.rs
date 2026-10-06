@@ -51,8 +51,8 @@ use lingot::config::Config;
 use lingot::scale::Scale;
 
 use crate::core::{Core, TunerResult};
-use crate::gauge::Needle;
-use crate::note::nearest_note;
+use lingot::gauge::Needle;
+use lingot::note::nearest_note;
 
 /// The entire frontend, embedded so the binary is self-sufficient.
 const INDEX_HTML: &str = include_str!("web/index.html");

@@ -22,9 +22,9 @@
  * along with lingot_tuner_rust. If not, see <https://www.gnu.org/licenses/>.
  */
 
-//! Shared note-mapping helper used by both the CLI and GUI frontends.
+//! Shared note-mapping helper used by every frontend, native and wasm.
 
-use lingot::scale::Scale;
+use crate::scale::Scale;
 use uom::si::f64::Frequency;
 use uom::si::frequency::hertz;
 
