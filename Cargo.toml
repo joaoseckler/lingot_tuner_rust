@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["lingot", "lingot-tuner"]
+members = ["lingot", "lingot-tuner", "lingot-wasm"]
 
 [workspace.package]
 version = "0.2.2"

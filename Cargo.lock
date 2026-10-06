@@ -2243,6 +2243,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "lingot-wasm"
+version = "0.2.2"
+dependencies = [
+ "lingot",
+ "uom",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "linux-raw-sys"
 version = "0.4.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"

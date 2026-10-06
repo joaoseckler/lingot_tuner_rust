@@ -1,0 +1,19 @@
+[package]
+name = "lingot-wasm"
+description = "WebAssembly bindings exposing the lingot tuner's DSP core to JavaScript, for a serverless browser frontend"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository = "https://github.com/theodoreOnzGit/lingot_tuner_rust"
+readme = "README.md"
+keywords = ["wasm", "webassembly", "tuner", "music", "audio"]
+categories = ["wasm", "multimedia::audio"]
+exclude = ["example/"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+lingot = { path = "../lingot", version = "0.2.2" }
+wasm-bindgen = "0.2"
+uom = "0.38.0"
